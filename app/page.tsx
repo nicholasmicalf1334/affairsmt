@@ -14,7 +14,7 @@ export default async function Home() {
       <header className="bar">
         <a href="#top" className="bar-logo" aria-label="affairs.mt home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/img/logo.png" alt="" width={1600} height={694} />
+          <img src="/img/wordmark.png" alt="" width={900} height={412} />
         </a>
         <nav className="bar-nav">
           <a href="#events">Events</a>
@@ -109,7 +109,11 @@ export default async function Home() {
       </main>
 
       <footer className="foot">
-        <p className="foot-closer">{n.closer}</p>
+        <div className="foot-top">
+          <p className="foot-closer">{n.closer}</p>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/img/wordmark.png" alt="affairs.mt" width={900} height={412} className="foot-mark" loading="lazy" />
+        </div>
         <div className="foot-row">
           <a href={site.instagram} target="_blank" rel="noopener">Instagram</a>
           <a href={n.ticketUrl} target="_blank" rel="noopener">Tickets</a>
