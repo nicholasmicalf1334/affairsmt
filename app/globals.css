@@ -356,6 +356,7 @@ body {
 .ev-when span { white-space: nowrap; }
 .ev-when { margin-top: 8px; font-weight: 800; font-size: clamp(18px, 2vw, 26px); text-transform: uppercase; letter-spacing: -0.01em; }
 .ev-lineup { margin-top: 22px; font-family: var(--font-poster); font-size: clamp(20px, 2.1vw, 30px); text-transform: uppercase; line-height: 1.2; }
+.ev-lineup { display: flex; flex-wrap: wrap; row-gap: 2px; }
 .ev-lineup span { white-space: nowrap; }
 .ev-lineup b { color: var(--red); font-weight: 400; margin: 0 0.35em; }
 .ev-buy { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 34px; }
