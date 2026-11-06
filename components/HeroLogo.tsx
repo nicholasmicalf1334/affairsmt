@@ -18,7 +18,7 @@ export default function HeroLogo() {
     <div className="hero-logo-stage" onPointerMove={onMove} onPointerLeave={() => ref.current && (ref.current.style.transform = "")}>
       <div ref={ref} className="hero-logo-tilt">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/img/logo.png" alt="affairs.mt" width={1600} height={694} className="hero-logo" fetchPriority="high" />
+        <img src="/img/wordmark-lg.png" alt="affairs.mt" width={1600} height={733} className="hero-logo" fetchPriority="high" />
       </div>
     </div>
   );

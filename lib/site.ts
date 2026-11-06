@@ -62,7 +62,7 @@ export const events: { upcoming: AffairEvent[]; past: AffairEvent[] } = {
       venue: "Graffiti Club, Paceville",
       time: "10PM - 4AM",
       lineup: nextAffair.lineup.map((d) => d.name),
-      poster: "/img/feed/graffiti-club-qr.webp",
+      poster: "/img/feed/tickets-qr.webp",
       ticketUrl: nextAffair.ticketUrl,
       price: nextAffair.price,
       ticketName: nextAffair.ticketName,
@@ -72,10 +72,11 @@ export const events: { upcoming: AffairEvent[]; past: AffairEvent[] } = {
     {
       id: "oct-30",
       date: "30.10.26",
-      weekday: "Friday",
-      venue: "Barracuda Rooftop Lounge",
+      weekday: "Thursday",
+      venue: "Barracuda Rooftop Lounge, Level 3",
       time: "21:30 - 1:30",
       lineup: ["Jukeboxsimmy", "Sareon", "Faith", "Nik"],
+      poster: "/img/feed/haunted-rooftop.webp",
     },
     {
       id: "oct-02",
