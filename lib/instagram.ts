@@ -5,7 +5,6 @@ export type Post = { id: string; image: string; href: string; caption: string };
 // Shown until INSTAGRAM_TOKEN is set (or if the API call fails).
 const fallback: Post[] = [
   { id: "f1", image: "/img/feed/tickets-qr.webp", caption: "28.11.26 Graffiti Club" },
-  { id: "f2", image: "/img/dj/mari-mars.webp", caption: "Mari Mars" },
   { id: "f3", image: "/img/feed/giveaway.webp", caption: "Win tickets" },
   { id: "f4", image: "/img/feed/haunted-rooftop.webp", caption: "30.10 Haunted Rooftop" },
   { id: "f5", image: "/img/feed/barracuda-oct.webp", caption: "02.10 Barracuda" },

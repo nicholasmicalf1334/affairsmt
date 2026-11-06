@@ -1,4 +1,5 @@
 import HeroLogo from "@/components/HeroLogo";
+import DjCarousel from "@/components/DjCarousel";
 import Events from "@/components/Events";
 import Lineup from "@/components/Lineup";
 import { getPosts } from "@/lib/instagram";
@@ -7,7 +8,9 @@ import { site, nextAffair as n, events } from "@/lib/site";
 const tilts = [-3, 2.2, -1.4, 3, -2.4, 1.6];
 
 export default async function Home() {
-  const posts = await getPosts(6);
+  const posts = await getPosts(5);
+  // DJ carousel sits in the second slot, after the first post.
+  const feed = [posts[0], "djs" as const, ...posts.slice(1)].filter(Boolean);
 
   return (
     <>
@@ -95,13 +98,17 @@ export default async function Home() {
             </a>
           </div>
           <ul className="feed-grid">
-            {posts.map((p, i) => (
-              <li key={p.id} style={{ "--tilt": `${tilts[i % tilts.length]}deg` } as React.CSSProperties}>
-                <a href={p.href} target="_blank" rel="noopener" className="polaroid">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={p.image} alt={p.caption || "affairs.mt on Instagram"} loading="lazy" width={720} height={900} />
-                  <span>{p.caption}</span>
-                </a>
+            {feed.map((p, i) => (
+              <li key={p === "djs" ? "djs" : p.id} style={{ "--tilt": `${tilts[i % tilts.length]}deg` } as React.CSSProperties}>
+                {p === "djs" ? (
+                  <DjCarousel djs={n.lineup} href={site.instagram} />
+                ) : (
+                  <a href={p.href} target="_blank" rel="noopener" className="polaroid">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={p.image} alt={p.caption || "affairs.mt on Instagram"} loading="lazy" width={720} height={900} />
+                    <span>{p.caption}</span>
+                  </a>
+                )}
               </li>
             ))}
           </ul>
