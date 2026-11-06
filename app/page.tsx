@@ -7,6 +7,43 @@ import { site, nextAffair as n, events } from "@/lib/site";
 
 const tilts = [-3, 2.2, -1.4, 3, -2.4, 1.6];
 
+function eventJsonLd() {
+  const org = { "@type": "Organization", name: "affairs.mt", url: "https://affairs.mt", sameAs: [site.instagram] };
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      { ...org, "@id": "https://affairs.mt/#org", logo: "https://affairs.mt/img/wordmark-lg.png" },
+      {
+        "@type": "Event",
+        name: `affairs.mt at ${n.venue}`,
+        description: n.blurb[0],
+        startDate: n.startIso,
+        endDate: n.endIso,
+        eventStatus: "https://schema.org/EventScheduled",
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        image: ["https://affairs.mt/img/feed/tickets-qr.webp", "https://affairs.mt/og-affairs.jpg"],
+        location: {
+          "@type": "Place",
+          name: n.venue,
+          address: { "@type": "PostalAddress", addressLocality: n.area, addressRegion: "St Julian's", addressCountry: "MT" },
+        },
+        performer: n.lineup.map((d) => ({ "@type": "Person", name: d.name })),
+        organizer: { "@id": "https://affairs.mt/#org" },
+        typicalAgeRange: "17-",
+        offers: {
+          "@type": "Offer",
+          name: n.ticketName,
+          price: n.price.replace(/[^\d.]/g, ""),
+          priceCurrency: "EUR",
+          availability: "https://schema.org/InStock",
+          url: n.ticketUrl,
+          validFrom: "2026-10-01",
+        },
+      },
+    ],
+  };
+}
+
 export default async function Home() {
   const posts = await getPosts(5);
   // DJ carousel sits in the second slot, after the first post.
@@ -14,6 +51,10 @@ export default async function Home() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd()).replace(/</g, "\\u003c") }}
+      />
       <header className="bar">
         <a href="#top" className="bar-logo" aria-label="affairs.mt home">
           {/* eslint-disable-next-line @next/next/no-img-element */}

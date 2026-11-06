@@ -15,6 +15,9 @@ export const nextAffair = {
   year: "2026",
   venue: "Graffiti Club",
   area: "Paceville",
+  // ISO times for search engines (Malta is UTC+1 in winter)
+  startIso: "2026-11-28T22:00:00+01:00",
+  endIso: "2026-11-29T04:00:00+01:00",
   doors: "10PM",
   close: "4AM",
   ticketUrl: "https://biljett.mt/events/affairs-mt-3/",
