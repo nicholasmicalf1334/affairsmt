@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "affairs-mt",
+  // Nicholasmicalf1334@gmail.com's Account (owns the affairs.mt zone)
+  "account_id": "8fb872963ea210f182e1fb7b47b3e6c8",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [{ "binding": "WORKER_SELF_REFERENCE", "service": "affairs-mt" }],
+  "routes": [
+    { "pattern": "affairs.mt", "custom_domain": true },
+    { "pattern": "www.affairs.mt", "custom_domain": true }
+  ],
+  "observability": { "enabled": true }
+}
