@@ -1,69 +1,100 @@
-import Image from "next/image";
+import Wordmark from "@/components/Wordmark";
+import Spray from "@/components/Spray";
+import { site, nextAffair, pastAffairs } from "@/lib/site";
 
 export default function Home() {
+  const n = nextAffair;
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
+    <>
+      <header className="topbar">
+        <a href="#top" className="topbar-mark">
+          <Wordmark />
+        </a>
+        <nav className="topbar-nav">
+          <a href="#lineup">Lineup</a>
+          <a href={site.instagram} target="_blank" rel="noopener">Instagram</a>
+          <a href={site.ticketUrl} className="btn btn-sm" target="_blank" rel="noopener">Tickets</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section className="hero">
+          <Spray className="hero-spray" />
+          <div className="hero-inner">
+            <p className="kicker">{site.tagline}</p>
+            <h1 className="hero-title">
+              <Wordmark className="chrome" />
+            </h1>
+            <div className="hero-next">
+              <span className="kicker">Next affair</span>
+              <span className="hero-date">{n.day}.{n.month}</span>
+              <span className="hero-venue">{n.venue}</span>
+            </div>
+          </div>
+          <a href="#lineup" className="scroll-cue" aria-label="Scroll to lineup">
+            <span />
           </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+        </section>
+
+        <section id="lineup" className="lineup">
+          <div className="lineup-head">
+            <span className="kicker">Lineup</span>
+            <span className="kicker kicker-dim">{n.day} {n.monthName} {n.year}</span>
+          </div>
+          <ol className="lineup-list">
+            {n.lineup.map((dj, i) => (
+              <li key={dj}>
+                <span className="lineup-no">{String(i + 1).padStart(2, "0")}</span>
+                <span className="lineup-name">{dj}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="ticket">
+          <Spray variant="slash" className="ticket-spray" />
+          <div className="ticket-grid">
+            <div>
+              <span className="kicker">Date</span>
+              <p className="ticket-val">{n.day}.{n.month}.{n.year.slice(2)}</p>
+            </div>
+            <div>
+              <span className="kicker">Time</span>
+              <p className="ticket-val">{n.doors} - {n.close}</p>
+            </div>
+            <div>
+              <span className="kicker">Venue</span>
+              <p className="ticket-val">{n.venue}</p>
+              <p className="ticket-sub">{n.area}</p>
+            </div>
+          </div>
+          <a href={site.ticketUrl} className="btn btn-lg" target="_blank" rel="noopener">
+            Get tickets
           </a>
-        </div>
+        </section>
+
+        <section className="past">
+          <span className="kicker">Past affairs</span>
+          <ul>
+            {pastAffairs.map((p) => (
+              <li key={p.date}>
+                <span className="past-date">{p.date}</span>
+                <span className="past-title">{p.title}</span>
+                <span className="past-venue">{p.venue}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
       </main>
-    </div>
+
+      <footer className="footer">
+        <p className="footer-big">AFFAIRS.MT</p>
+        <div className="footer-row">
+          <a href={site.instagram} target="_blank" rel="noopener">@affairs.mt</a>
+          <span>18+ only. Drink responsibly.</span>
+          <span>&copy; {site.year} affairs.mt</span>
+        </div>
+      </footer>
+    </>
   );
 }
