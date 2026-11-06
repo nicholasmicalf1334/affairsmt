@@ -1,25 +1,31 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Yellowtail, Archivo } from "next/font/google";
+import { Anton, Archivo, Caveat } from "next/font/google";
 import "./globals.css";
 
 const anton = Anton({ weight: "400", subsets: ["latin"], variable: "--font-poster" });
-const script = Yellowtail({ weight: "400", subsets: ["latin"], variable: "--font-script" });
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-body" });
+const hand = Caveat({ weight: ["500", "700"], subsets: ["latin"], variable: "--font-hand" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://affairs.mt"),
-  title: "affairs.mt | Parties in Malta",
-  description: "affairs.mt is a party brand in Malta. Next affair, lineup and tickets.",
-  openGraph: { title: "affairs.mt", description: "Parties in Malta.", url: "https://affairs.mt", siteName: "affairs.mt" },
+  title: "affairs.mt | Good people, better nights",
+  description: "AFFAIRS.mt is back this winter. 28 November 2026 at Graffiti Club, Paceville. Tickets available now.",
+  openGraph: {
+    title: "affairs.mt",
+    description: "Good people, better nights. 28.11.26 Graffiti Club, Paceville.",
+    url: "https://affairs.mt",
+    siteName: "affairs.mt",
+    images: ["/og.jpg"],
+  },
 };
 
-export const viewport: Viewport = { themeColor: "#0a0a0a" };
+export const viewport: Viewport = { themeColor: "#d20a17" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${anton.variable} ${script.variable} ${archivo.variable}`}>
+    <html lang="en" className={`${anton.variable} ${archivo.variable} ${hand.variable}`}>
       <body>
-        <div className="grain" aria-hidden />
+        <div className="frame" aria-hidden />
         {children}
       </body>
     </html>
