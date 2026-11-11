@@ -44,8 +44,8 @@ function eventJsonLd() {
   };
 }
 
-export default async function Home() {
-  const posts = await getPosts(5);
+export default function Home() {
+  const posts = getPosts(5);
   // DJ carousel sits in the second slot, after the first post.
   const feed = [posts[0], "djs" as const, ...posts.slice(1)].filter(Boolean);
 
